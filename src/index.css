@@ -16,6 +16,20 @@ header {
 
 main{
 	min-height: 70vh;
+	text-align: center;
+}
+
+.card {
+ display:  flex;
+ float: left;
+ padding: 10px;
+}
+
+.btn {
+	display: flex;
+	float: left;
+	padding: 5px;
+
 }
 
 footer {

@@ -9,7 +9,8 @@ function App() {
      <>
       <Header />
       <main>
-          <Details />
+
+          <Details page={1}/>
       </main>
       <Footer />
      </>
