@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import {Container, Row, Col} from 'react-bootstrap'
 
 import ICard from '../components/ICard'
 
@@ -11,22 +11,20 @@ class Details extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {};
+		this.index = 1;
 		
-		
-		
+			
 	}
 
-    
 
  
 	componentDidMount(){
-		console.log(typeof(this.data))
-		fetch(`https://reqres.in/api/users?page=2`)
+		fetch(`https://reqres.in/api/users?page=${this.index}`)
 		 .then(res => res.json())
 		 .then(data =>{
 	
 		 	this.setState({
-		 		pageNo: 2,
+		 		index: this.index,
 		 		data: data.data,
 		 		page: data.page,
 		 		per_page: data.per_page,
@@ -35,25 +33,29 @@ class Details extends React.Component {
 		 		total_pages: data.total_pages
 		 	})
 
-		 	console.log('name', this.state.data[0].first_name)
-
 		 	
 		 })
 		 .catch(err =>{
 		 	console.log(err);
 		 })
 	}
+	 page1(no){
+    	this.index = no
+    	this.setState({index: this.index})
+    	console.log('this.index', this.index)
+    	this.forceUpdate();
+    }
+    page2(no) {
+    	this.index = no
+    	this.setState({index: this.index})
+    	console.log('this.index', this.index)
+    	this.forceUpdate();
+    }
 
   /*this function contains the UI components to show the mapping details of the data*/
-       handleClick1 = (p) =>{
-       	console.log('hello',p)
-         p = 1
 
-        }
-        handleClick2 = (p) =>{
-         p = 2
-
-        }
+ 
+        
   
 
 
@@ -65,39 +67,56 @@ class Details extends React.Component {
 					<h2>Loadig......</h2>
 				)
 		} else {
-			const data = this.state.data;
-			const page = this.state.page;
-
-			console.log('pageno',page)
+			const { page, per_page, support, total, total_pages} = this.state;
+			
+  
+			
 			return(
-				<>
-				   <div className='btn'>
-                     <button onclick={ this.handleClick1 }>1</button>
-                     <button onclick={ this.handleClick2 }>2</button>
-
-				   </div>
-				  
+				<Container>
+				   <h1 className='center'>Details of the People</h1>
+				 <Row> 
 				  {
 
 				       Object.entries(this.state.data).map((item, id) =>( 
 				        
 				        
-	                    <div className='card'>     
+	                    <Col className='card' key={id} >     
    
-                           <ICard data={item[1]} key={id}/>
-                        </div>
+                            <ICard data={item[1]} key={id}/>
+                        </Col>
 
 
 				      )
 
 				       )	
 				  	   
-				  	 }
+				  	}
+				  </Row>
+				  <Row>
+                     <Col style={{textAlign: 'center'}}>
+                        <p>showing page { page } of {total_pages}</p>
+                     </Col>
+				  </Row>
+				  <Row>
+				       <div style={{textAlign: 'center'}}>
+				  		<button onClick={() => this.page1(1)} className='btn'>1</button>
+				  		<button onClick={() => this.page2(2)} className='btn'>2</button>
+				  		</div>
+				  </Row>
+				  <Row style={{textAlign: 'center', backgroundColor: 'lightgray', padding: 5}}>
+                     <div>
+                         {support.url}
+                     </div>
+                     <div>
+                        {support.text}
+                     </div>
+
+				  </Row>
 
 
 				  	
 				 
-				</>
+				</Container>
 			)
 
 		}

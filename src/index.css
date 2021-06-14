@@ -15,21 +15,31 @@ header {
 }
 
 main{
-	min-height: 70vh;
-	text-align: center;
+	min-height: 80vh;
 }
 
+Container {
+	display: flex;
+	flex-flow: row;
+	
+}
 .card {
- display:  flex;
- float: left;
- padding: 10px;
+   padding: 10px;
+   margin-left: 10%;
+   display: flex;
+  
+   
+
+}
+.center{
+	text-align: center;
+
 }
 
 .btn {
-	display: flex;
-	float: left;
-	padding: 5px;
-
+	
+  padding: 3px;
+  margin-bottom: 3px;
 }
 
 footer {
