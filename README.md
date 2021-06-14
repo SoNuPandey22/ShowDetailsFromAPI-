@@ -1,5 +1,7 @@
 # screenShot of the project 
-![page1](src/page1.png)
+![page1](images/page1.png)
+![](images/page1b.png)
+![](images/page2.png)
 
 
 
