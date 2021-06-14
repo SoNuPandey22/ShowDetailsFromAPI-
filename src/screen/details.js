@@ -11,46 +11,13 @@ class Details extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {};
-		this.index = 2;
 		
-			
 	}
 
 
  
-	componentDidMount(){
-		fetch(`https://reqres.in/api/users?page=${this.index}`)
-		 .then(res => res.json())
-		 .then(data =>{
-	
-		 	this.setState({
-		 		index: this.index,
-		 		data: data.data,
-		 		page: data.page,
-		 		per_page: data.per_page,
-		 		support: data.support,
-		 		total: data.total,
-		 		total_pages: data.total_pages
-		 	})
 
-		 	
-		 })
-		 .catch(err =>{
-		 	console.log(err);
-		 })
-	}
-	 page1(no){
-    	this.index = no
-    	this.setState({index: this.index})
-    	console.log('this.index', this.index)
-    	this.forceUpdate();
-    }
-    page2(no) {
-    	this.index = no
-    	this.setState({index: this.index})
-    	console.log('this.index', this.index)
-    	this.forceUpdate();
-    }
+
 
   /*this function contains the UI components to show the mapping details of the data*/
 
@@ -62,12 +29,10 @@ class Details extends React.Component {
 	render() {
 
 	
-		if(!this.state.data) {
-			return (
-					<h2>Loadig......</h2>
-				)
-		} else {
-			const { page, per_page, support, total, total_pages} = this.state;
+		
+			const { data, page, per_page, support, total, total_pages } = this.props;
+			const { Handlepage } = this.props;
+
 			
   
 			
@@ -77,7 +42,7 @@ class Details extends React.Component {
 				 <Row> 
 				  {
 
-				       Object.entries(this.state.data).map((item, id) =>( 
+				       Object.entries( data ).map((item, id) =>( 
 				        
 				        
 	                    <Col className='card' key={id} >     
@@ -94,13 +59,15 @@ class Details extends React.Component {
 				  </Row>
 				  <Row>
                      <Col style={{textAlign: 'center'}}>
-                        <p>showing page { page } of {total_pages}</p>
+                        <p>Showing page { page } of {total_pages}</p>
+                        <p> Total entries { total }</p>
+                        <p>data per page { per_page }</p>
                      </Col>
 				  </Row>
 				  <Row>
 				       <div style={{textAlign: 'center'}}>
-				  		<button onClick={() => this.page1(1)} className='btn'>1</button>
-				  		<button onClick={() => this.page2(2)} className='btn'>2</button>
+				  		<button onClick={() => Handlepage(1)} className='btn'>1</button>
+				  		<button onClick={() => Handlepage(2)} className='btn'>2</button>
 				  		</div>
 				  </Row>
 				  <Row style={{textAlign: 'center', backgroundColor: 'lightgray', padding: 5, color: 'red'}}>
@@ -119,7 +86,7 @@ class Details extends React.Component {
 				</Container>
 			)
 
-		}
+		
 	     
 		
 	}
