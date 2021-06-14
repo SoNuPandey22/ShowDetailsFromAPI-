@@ -11,7 +11,7 @@ class Details extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {};
-		this.index = 1;
+		this.index = 2;
 		
 			
 	}
@@ -103,11 +103,11 @@ class Details extends React.Component {
 				  		<button onClick={() => this.page2(2)} className='btn'>2</button>
 				  		</div>
 				  </Row>
-				  <Row style={{textAlign: 'center', backgroundColor: 'lightgray', padding: 5}}>
+				  <Row style={{textAlign: 'center', backgroundColor: 'lightgray', padding: 5, color: 'red'}}>
                      <div>
                          {support.url}
                      </div>
-                     <div>
+                     <div style={{color: 'green'}}>
                         {support.text}
                      </div>
 
